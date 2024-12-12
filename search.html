@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restoran di Bantul</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="search.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header">
+      <a href="logo"><img src="Logo1.png" class="putih" /></a>
+      <div class="search-container">
+        <input placeholder="Cari" type="text" id="search-box" />
+        <button id="search-button">
+          <i class="fas fa-search"></i>
+        </button>
+        <!-- Tombol pencarian ditambahkan -->
+      </div>
+      <i class="fas fa-user-circle"></i>
+      <div class="hamburger-menu" id="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="makanan.html">Rekomendasi</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="index.html#aboutus">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="title">Restoran di Bantul</div>
+      <div class="buttons">
+        <label for="category-filter">Filter Kategori:</label>
+        <select id="category-filter">
+          <option value="all">Semua Kategori</option>
+          <option value="Makanan">Makanan</option>
+          <option value="Minuman">Minuman</option>
+          <option value="Kering">Kering</option>
+          <option value="Berkuah">Berkuah</option>
+        </select>
+
+        <button id="sort-rating">Urutkan Berdasarkan Rating</button>
+      </div>
+      <div class="section-title">Tempat makan terbaik</div>
+
+    <div id="restaurant-container" class="container">
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="search.js"></script>
+    <script>
+      // Data restoran
+      const restaurantData = [
+        {
+          id: "bakso-pak-to",
+          name: "Bakso Pak To",
+          images: [
+            "baksopakto1.jpg",
+            "mieayampakto1.jpeg",
+            "sekitarpakto1.jpeg",
+          ],
+          rating: 4.4,
+          reviewsCount: 651,
+          openingHours: "11.00 - 20.00",
+          priceRange: "Rp 3.000 - 25.000",
+          location:
+            "Jl. Tirtodiningrat, Ketandan, Patalan, Kec. Jetis, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55781",
+          reviews: [
+            "Jauuuh banget dari town yah, kesini Karna ada acara daerah situ, buat rasa soso...",
+            "Favorit menu disini kalo aku pribadi bakso cincang, rekomendasi banget buat yang suka bakso...",
+          ],
+          categories: ["Makanan", "Berkuah"],
+        },
+        {
+          id: "Mbah-cemplung",
+          name: "Ayam Goreng Jawa Mbah Cemplung",
+          images: [
+            "ayamgorengmbahcemplung1.jpeg",
+            "ayamgorengmbahcemplung2.jpeg",
+            "Menumahcemplung.png",
+          ],
+          rating: 4.5,
+          reviewsCount: 5332,
+          openingHours: "08.00 - 19.00",
+          priceRange: "Rp 25.000 - 50.000",
+          location:
+            "Jl. Sembungan No.05, Sembungan, Bangunjiwo, Kec. Kasihan, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55184",
+          reviews: [
+            "Salah satu ayam goreng terenak yg pernah gw makan, ayamnya besar bgt potongannya.",
+            "Ayam goreng Kampung nya enak dan lembut, sambel nya juga enak. Puas makan disini.",
+          ],
+          categories: ["Makanan", "Kering", "Tradisional"],
+        },
+        {
+          id: "nasi-goreng-atletis",
+          name: "Nasi Goreng Atletis",
+          images: [
+            "nasigorengatletis1.jpg",
+            "menuatletis.jpeg",
+            "sekitaratletis.jpeg",
+          ],
+          rating: 4.9,
+          reviewsCount: 182,
+          openingHours: "17.00 - 23.00",
+          priceRange: "Rp 3.000 - 25.000",
+          location:
+            "Jl. Jend. A. Yani, Nyangkringan, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: [
+            "Bagi yg suka nasi goreng dan sejenisnya tidak terlalu manis , nasgor atletis bisa jadi pilihan , harganya under 20k, pas makan kmaren pesen kwetiwwa goreng seafood , isianya cukup lenkap , ada udang 3 , bakso ikan , cumi , overalla bakal balik kesini lagi , recomended",
+            "Khas nasgor rumahan, paling rekomen yg nasgor original sih, lebih medok kalo yang seafood rasanya light, overall good cepet jg walau banyak yang pesen online, kesini random padahal nyari di googlemaps sehabis dari pantai walau agak masuk gang dikit tp worth bgt buat yg nyari nasgor enak di Bantul",
+          ],
+          categories: ["Makanan", "Kering"],
+        },
+        {
+          id: "tempo-coffe",
+          name: "Tampa Coffee Bar",
+          images: ["Tempocoffe.jpeg", "Tempocoffe2.jpeg", "Tempocoffe3.jpeg"],
+          rating: 4.8,
+          reviewsCount: 117,
+          openingHours: "8.00 - 23.00",
+          priceRange: "Rp25.000 - 50.000",
+          location:
+            "Jl. Mgr. Sugiyo Pranoto No.27, Bantul Wr., Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: [
+            "Makanan n minuman nya enak semua. Recommend. Ada indoor berAC & ada outdoor nya jg. Sayangnya tmpt nya kurang luas 👍",
+            "Tempatnya enak buat WFC, tiap meja ada 1 colokan listrik, kalau butuh lebih dari 1 colokan maka sebaiknya bawa extention colokan, cocok untuk WFC individu, karena rata rata meja maksimal untuk 2 orang, kalau buat group work kurang cocok, pelayanannya sopan, walaupun kurang senyum dikit, tapi gapapa yang penting tetep baik dan sopan, snack dan pilihan minumannya recommended semua, tapi yang kelaperan dan cari makanan berat main course ga ada disini, kesimpulan: cocok banget dan recomended buat WFC dalam kondisi tidak kelaparan",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          id: "mie-ayam-popye",
+          name: "Mie Ayam Popeye Pak Surami",
+          images: [
+            "Makanan Popye.jpeg",
+            "Makanan Popye1.jpeg",
+            "Makanan Popye3.jpeg",
+          ],
+          rating: 4.8,
+          reviewsCount: 727,
+          openingHours: "8.00 - 19.00",
+          priceRange: "Rp1.000 - 25.000",
+          location:
+            "486W+GR5, Jl. Pramuka, Area Sawah, Trirenggo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55714",
+          reviews: [
+            "Klo buat saya mie ayamnya terlalu asin, untuk isinya mie banyak, harga mie ayamnya 10 ribuan, dapat bayam banyak sekali 1 mangkok, sayang terlalu asin rasanya mungkin jika tidak asin bisa enak.",
+            "Gak akan nemu genre mie ayam yang seperti ini. Coba order mie ayam bayam, mie nya setengah porsi dan order sate atinya. Mie ayam ½ + sate ati + es jeruk cuma bayar 15.000 Genre mie ayamnya unik, rasa cenderung gurih dan rasa bawangnya agak kuat. Tiap mudik jadi warung yang wajib dikunjungi",
+          ],
+          categories: ["Makanan", "Berkuah"],
+        },
+        {
+          id: "bacilak",
+          name: "BACILAK Baso Aci Galak & Seblak Gose",
+          images: ["Bacilak1.png", "Bacilak2.png", "Bacilak3.jpg"],
+          rating: 4.8,
+          reviewsCount: 38,
+          openingHours: "10.00–20.30",
+          priceRange: "Rp1-25.000",
+          location:
+            "Kurahan, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: ["Enak...pedasnya pas di lidah, pelayanan jg oke", "Mantap"],
+          categories: ["Makanan", "Berkuah"],
+        },
+        {
+          name: "Bakso dan Mie Ayam jamur BIDUT",
+          images: ["Bidut1.jpg", "Bidut2.jpg", "Bidut3.jpg"],
+          rating: 4.4,
+          reviewsCount: 323,
+          openingHours: "09.30–19.00",
+          priceRange: "Rp1.000 - 25.000",
+          location:
+            "Jl. Pramuka No.31, Area Sawah, Trirenggo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55714",
+          reviews: [
+            "Mie nya tipe yang agak besar. Ayam dan jamur punya rasa yang nyambung. Saya pesan yang pake ceker ayam. Satu porsi dapat 2. Dagingnya lembut manis dan mudah lepas dari tulang. Jadi makannya nggak terlalu ribet. Baiknya disediakan kran untuk cuci tangan karena kalau makan ceker tetap akan kotor jarinya.",
+            "Jos gandos",
+          ],
+          categories: ["Makanan", "Berkuah"],
+        },
+        {
+          name: "New Kebab Turkiyem Trirenggo",
+          images: ["Turkiyem1.jpg", "Turkiyem2.jpg", "Turkiyem3.jpg"],
+          rating: 4.8,
+          reviewsCount: 20,
+          openingHours: "8.00 - 19.00",
+          priceRange: "Rp1.000 - 25.000",
+          location:
+            "Jl. Ra. Kartini, Nogosari, Trirenggo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55714",
+          reviews: [
+            "Gokil, ga pelit daging, rasanya mantab, kue pancong nya juga ga pelit coklat 🤤🤤🤤",
+            "Enak bgt penjual e baik banget bagi” diskon",
+          ],
+          categories: ["Makanan"],
+        },
+        {
+          name: "Ayam Geprek Hara Chicken",
+          images: ["Hara1.jpg", "Hara2.jpg", "Hara3.jpg"],
+          rating: 4.9,
+          reviewsCount: 337,
+          openingHours: "06.00–21.00",
+          priceRange: "Rp1-25.000",
+          location:
+            "Jl. Kh Wahid Hasyim No.80, Bantul Karang, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: [
+            "Adem, nyaman, dan mantapp sukses Hara Bantul Karang 🤎",
+            "Lengkap lauk sayur tahu tempe jamur terong minuman, pekt lengkappp.",
+          ],
+          categories: ["Makanan"],
+        },
+        {
+          name: "Mister Burger Bantul ",
+          images: [
+            "MisterBurger2.jpg",
+            "MisterBurger1.jpg",
+            "MisterBurger3.jpg",
+          ],
+          rating: 4.4,
+          reviewsCount: 72,
+          openingHours: "10.30–21.00",
+          priceRange: "1-50.000",
+          location:
+            " Jl. Wahidin Sudiro Husudo No.70, Bantul, Kec. Bantul, Bantul, Daerah Istimewa Yogyakarta 55711, Karangbayam, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: [
+            " Affordable sekalii range harga satuannya mulai 17rb - 28rb. Bun enak, patty good enough, sayuran fresh, saos pedasnya enak",
+            "Lokasi strategis, yaa meskipun tempatnya sempit tapi tidak masalah. Burgernya enak, penyajian cepat.",
+          ],
+          categories: ["Makanan"],
+        },
+        {
+          name: "Smampir boba milk",
+          images: ["Smampur1.jpg", "Smampir2.jpg", "Smampir3.jpg"],
+          rating: 4.8,
+          reviewsCount: 727,
+          openingHours: " 11.00–21.30",
+          priceRange: "Rp5.000-30.000",
+          location:
+            "Jl. Moh. Yamin No.41, Kurahan, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: [
+            "Menu lumayan komplit.....",
+            " minuman boba enak dengan harga murah.👍",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          name: "Kedai Minum wedangan,ngemil,es ",
+          images: [
+            "Kedaiwedangan1.jpg",
+            "Kedai wedangan2.jpg",
+            "Kedaiwedangan3.jpg",
+          ],
+          rating: 4.8,
+          reviewsCount: 19,
+          openingHours: "11.00–23.00",
+          priceRange: "Rp5.000-30.000",
+          location:
+            "  Jl. Kh. Hasyim Ashari, Soropaten, Ringinharjo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55712",
+          reviews: [
+            "Wifinya lancar jaya, tempatnya juga nyaman. Rekomen pokonya, harga bersahabat, tidak membuat kantong menangis. Yang jelas istimewa deh.",
+            " Harga makanan terjangkau. Menu jus ada, cemilan ada.wifi gratis",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          id: "thumbas",
+          name: "Thumbas Minum Jl. Wahidin ",
+          images: [
+            "thumbasminum1.jpg",
+            "thumbasminum2.jpg",
+            "Thumbasminum3.png",
+          ],
+          rating: 4.3,
+          reviewsCount: 22,
+          openingHours: "10.00–21.00",
+          priceRange: "Rp5.000-30.00",
+          location:
+            "Jl. Dr. Wahidin Sudiro Husodo, Area Sawah, Trirenggo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55714",
+          reviews: [
+            "Hari ini akhirnya mencoba juga dan rame lho... ayo mampir.. biar merasakan enaknya 🥰🥰 ",
+            "Enak dan segar..variasi rasa sangat banyak..",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          name: "Kamsia Boba Bantul",
+          images: ["Kamsia1.jpg", "Kamsia2.jpg", "Kamsia3.jpg"],
+          rating: 4.8,
+          reviewsCount: 18,
+          openingHours: "12.00–21.00",
+          priceRange: "Rp 5.000-30.000",
+          location:
+            "Jl. Kh Wahid Hasyim No.101, Bantul Karang, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55712",
+          reviews: [
+            "Baru coba pilih yang salted caramel, enak jadi ga terlalu manis yg bikin bosen minumnya. Bobanya jg kenyal banget dan pas ukurannya. Akhirnya nemu boba di bantul yg gak zonk rasanya ",
+            "Franchise kamsia pertama di Bantul raya. Rasanya okee. Bobanya enak. Harga? masih affordable guys.",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          name: "Costarina Boba Drinks",
+          images: ["Costarina1.jpg", "Costarina2.jpg", "Costarina3.jpg"],
+          rating: 4.3,
+          reviewsCount: 8,
+          openingHours: "8.00 - 19.00",
+          priceRange: "Rp1.000 - 25.000",
+          location:
+            "Jl. Gua Selarong No.184, Bergan, Wijirejo, Kec. Pandak, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55761",
+          reviews: [
+            "Pelayanan ramah dan sopan, tersedia aneka es boba,pop ice juice dan kelapa muda",
+            "Tempat nyaman dan bobanya enak",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          name: "Coco Drink ",
+          images: ["Coco Drink1.jpg", "Coco Drink2.jpg", "Coco Drink3.jpg"],
+          rating: 4.6,
+          reviewsCount: 77,
+          openingHours: "13.00–23.00",
+          priceRange: "Rp5.000-25.000",
+          location:
+            "Kantongan, Nglembu, Panjangrejo, Kec. Pundong, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55771",
+          reviews: [
+            "datang disini sore sore, tempatnya nyaman , berada di dalam kampung yang masih asri banyak sawah dan dekat bukit. harga makanan dan minuman disini jg relatif murah, tp rasanya juga gak asal asalan.",
+            "ada snack, minuman dan makanan berat harga 10 ribuan, Worth it banget",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          name: "Pangkalan Juice & Sup Buah Antartika",
+          images: ["Pangkalan1.jpg", "Pangkalan2.jpg", "Pangkalan3.jpg"],
+          rating: 4.2,
+          reviewsCount: 35,
+          openingHours: "8.00 - 20.00",
+          priceRange: "Rp5.000 - 25.000",
+          location:
+            "Trisigan, Trisigan I, Murtigading, Kec. Sanden, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55763",
+          reviews: [
+            "Nyaman *Bersih *Buah fresh *Segar *Terjangkau *Tersedia jus mix",
+            "Tempat bersih nyaman. Juice nya enak.",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          id: "mixue",
+          name: "Mixue Bantul",
+          images: [
+            "Mixue Bantul1.jpg",
+            "Mixue Bantul2.jpg",
+            "Mixue Bantul3.jpg",
+          ],
+          rating: 4.4,
+          reviewsCount: 409,
+          openingHours: "sesuai mood",
+          priceRange: "Rp5.000 - 25.000",
+          location:
+            " Melikan kidul, Bantul, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta",
+          reviews: [
+            "Suka sih, ramah di kantong juga. Tapi kenapa bobanya sering habis ya. Pdahal enak banget",
+            "driawal mixue opening di bantul bru skrng try yg cabang bantul, soalnya dlu rame trs jdi males krna antrinya banya. btw aku suka fresh squeezed lemonade nya ✨",
+          ],
+          categories: ["Minuman"],
+        },
+        {
+          name: "Lava Chocodrink Bantul",
+          images: [
+            "Lava Chocodrink1.jpg",
+            "Lava Chocodrink2.jpg",
+            "Lava Chocodrink3.jpg",
+          ],
+          rating: 5.0,
+          reviewsCount: 20,
+          openingHours: "09.00–21.00",
+          priceRange: "Rp5.000 - 25.000",
+          location:
+            "Jl. Letjen. Suprapto No.18, Area Sawah, Trirenggo, Kec. Bantul, Kabupaten Bantul, Daerah Istimewa Yogyakarta 55711",
+          reviews: [
+            "Deket rumah di Bantul. Jual aneka varian minuman berbasis susu & coklat. Harga terjangkau. Penjual ramah. Rasa ok👌😉",
+            "Menu lumyan banyak,,porsi roti isinha lmyan bikin kenyang,,harga wort it",
+          ],
+          categories: ["Minuman"],
+        },
+      ];
+
+      // Fungsi untuk menampilkan restoran
+      function displayRestaurants(data) {
+        const container = document.getElementById("restaurant-container");
+        container.innerHTML = ""; // Bersihkan container
+
+        data.forEach((restaurant) => {
+          const restaurantCard = `
+          <div class="card" id="${restaurant.id}">
+            <div class="images">
+              ${restaurant.images
+                .map((img) => `<img src="${img}" alt="${restaurant.name}" />`)
+                .join("")}
+            </div>
+            <div class="info">
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>${restaurant.reviewsCount} Reviews</span>
+              </div>
+              <a>${restaurant.name}</a>
+            </div>
+            <div class="description">
+              <p>Buka Jam: ${restaurant.openingHours}</p>
+              <p>Harga: ${restaurant.priceRange}</p>
+              <p>Lokasi: ${restaurant.location}</p>
+              <p>Kategori: ${restaurant.categories.join(", ")}</p>
+              <p>Review Pelanggan:</p>
+              ${restaurant.reviews.map((review) => `<p>${review}</p>`).join("")}
+            </div>
+            <div class="actions">
+              <i class="fas fa-heart"></i>
+              <span>${restaurant.rating}</span>
+            </div>
+          </div>
+        `;
+          container.innerHTML += restaurantCard;
+        });
+      }
+      // Tampilkan semua restoran saat halaman dimuat
+      document.addEventListener("DOMContentLoaded", () => {
+        displayRestaurants(restaurantData);
+      });
+
+      // Filter berdasarkan kategori
+      document
+        .getElementById("category-filter")
+        .addEventListener("change", () => {
+          const selectedCategory =
+            document.getElementById("category-filter").value;
+
+          const filteredData =
+            selectedCategory === "all"
+              ? restaurantData // Tampilkan semua jika "Semua Kategori" dipilih
+              : restaurantData.filter((restaurant) =>
+                  restaurant.categories.includes(selectedCategory)
+                );
+
+          displayRestaurants(filteredData);
+        });
+
+      // Fungsi pencarian
+      document.getElementById("search-button").addEventListener("click", () => {
+        const query = document.getElementById("search-box").value.toLowerCase();
+        const filteredData = restaurantData.filter((restaurant) =>
+          restaurant.name.toLowerCase().includes(query)
+        );
+        displayRestaurants(filteredData);
+      });
+
+      // Tambahkan event listener untuk Enter key
+      document
+        .getElementById("search-box")
+        .addEventListener("keypress", (event) => {
+          if (event.key === "Enter") {
+            document.getElementById("search-button").click();
+          }
+        });
+
+      // Variabel untuk melacak urutan saat ini
+      let isAscending = false; // Default: Descending
+
+      // Fungsi untuk mengurutkan berdasarkan rating
+      document.getElementById("sort-rating").addEventListener("click", () => {
+        const sortedData = [...restaurantData].sort((a, b) => {
+          return isAscending ? a.rating - b.rating : b.rating - a.rating;
+        });
+
+        // Tampilkan data yang telah diurutkan
+        displayRestaurants(sortedData);
+
+        // Toggle status urutan
+        isAscending = !isAscending;
+
+        // Ubah teks tombol berdasarkan urutan
+        const sortButton = document.getElementById("sort-rating");
+        sortButton.textContent = isAscending
+          ? "Urutkan Berdasarkan Rating Tertinggi"
+          : "Urutkan Berdasarkan Rating Terendah";
+      });
+    </script>
+  </body>
+</html>

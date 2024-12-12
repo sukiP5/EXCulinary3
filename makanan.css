@@ -1,0 +1,176 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #6b1515;
+  color: #fff;
+}
+
+.header img {
+  width: auto;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.search-container {
+  position: relative; /* Agar elemen di dalamnya bisa diposisikan relatif */
+  width: 100%; /* Membuat kontainer mengambil lebar penuh */
+}
+
+#search-box {
+  width: 250px; /* Input akan mengambil seluruh lebar kontainer */
+  padding: 5px 10px; /* Padding untuk teks input */
+  padding-right: 40px; /* Memberikan ruang di kanan untuk tombol */
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Membuat sudut input membulat */
+  box-sizing: border-box; /* Pastikan padding tidak memengaruhi lebar total */
+  position: absolute;
+  right: 0;
+  top: 50%; /* Posisikan tombol di tengah vertikal */
+  transform: translateY(
+    -50%
+  ); /* Posisikan tombol tepat di tengah secara vertikal */
+}
+
+#search-button {
+  position: absolute; /* Menempatkan tombol secara absolut di dalam input */
+  right: 10px; /* Jarak dari sisi kanan */
+  top: 50%; /* Posisikan tombol di tengah vertikal */
+  transform: translateY(
+    -50%
+  ); /* Posisikan tombol tepat di tengah secara vertikal */
+  background: none; /* Hilangkan latar belakang tombol */
+  border: none; /* Hilangkan border tombol */
+  color: #aaa; /* Warna ikon */
+  cursor: pointer; /* Mengubah kursor menjadi pointer saat hover */
+  font-size: 16px; /* Ukuran ikon */
+  z-index: 100;
+}
+
+.hamburger-menu {
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+  margin: 10px;
+}
+
+/* Styling untuk nav-menu */
+#nav-menu {
+  position: fixed;
+  top: 1;
+  right: -300px; /* Awalnya di luar layar sebelah kanan */
+  width: 200px;
+  height: 50%;
+  background-color: #6b1515;
+  color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: right 0.3s ease-in-out; /* Animasi smooth saat masuk/keluar */
+}
+
+#nav-menu ul {
+  list-style-type: none;
+  padding: 20px;
+  margin: 0;
+}
+
+#nav-menu li {
+  margin: 20px 0;
+}
+
+#nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+/* Untuk menampilkan nav-menu */
+#nav-menu.show {
+  right: 0; /* Posisi menu saat muncul di layar */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#restaurant-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 kolom per baris */
+  gap: 20px; /* Jarak antar elemen */
+}
+
+.restaurant-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-5px);
+}
+
+.restaurant-card img {
+  width: 100%; /* Memenuhi lebar kartu */
+  height: 150px; /* Tinggi tetap */
+  object-fit: cover; /* Memastikan gambar tetap proporsional dan fokus pada konten utama */
+  border-bottom: 1px solid #ddd;
+}
+
+.restaurant-info {
+  padding: 15px;
+}
+
+.restaurant-info h3 {
+  font-size: 1.2em;
+  margin: 10px 0;
+  color: #444;
+}
+
+.restaurant-info p {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.rating {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #ff9800; /* Warna untuk bintang */
+}
+
+@media (max-width: 992px) {
+  #restaurant-container {
+    grid-template-columns: repeat(5, 1fr); /* 3 kolom untuk layar lebih kecil */
+  }
+}
+
+@media (max-width: 768px) {
+  #restaurant-container {
+    grid-template-columns: repeat(4, 1fr); /* 2 kolom untuk tablet */
+  }
+}
+
+@media (max-width: 576px) {
+  #restaurant-container {
+    grid-template-columns: repeat(3, 1fr); /* 1 kolom untuk ponsel */
+  }
+}

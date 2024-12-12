@@ -1,0 +1,234 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #6b1515;
+  color: #fff;
+}
+
+.header img {
+  width: auto;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.search-container {
+  position: relative; /* Agar elemen di dalamnya bisa diposisikan relatif */
+  width: 100%; /* Membuat kontainer mengambil lebar penuh */
+}
+
+#search-box {
+  width: 250px; /* Input akan mengambil seluruh lebar kontainer */
+  padding: 5px 10px; /* Padding untuk teks input */
+  padding-right: 40px; /* Memberikan ruang di kanan untuk tombol */
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Membuat sudut input membulat */
+  box-sizing: border-box; /* Pastikan padding tidak memengaruhi lebar total */
+  position: absolute;
+  right: 0;
+  top: 50%; /* Posisikan tombol di tengah vertikal */
+  transform: translateY(
+    -50%
+  ); /* Posisikan tombol tepat di tengah secara vertikal */
+}
+
+#search-button {
+  position: absolute; /* Menempatkan tombol secara absolut di dalam input */
+  right: 10px; /* Jarak dari sisi kanan */
+  top: 50%; /* Posisikan tombol di tengah vertikal */
+  transform: translateY(
+    -50%
+  ); /* Posisikan tombol tepat di tengah secara vertikal */
+  background: none; /* Hilangkan latar belakang tombol */
+  border: none; /* Hilangkan border tombol */
+  color: #aaa; /* Warna ikon */
+  cursor: pointer; /* Mengubah kursor menjadi pointer saat hover */
+  font-size: 16px; /* Ukuran ikon */
+  z-index: 100;
+}
+
+.hamburger-menu {
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+  margin: 10px;
+}
+
+/* Styling untuk nav-menu */
+#nav-menu {
+  position: fixed;
+  top: 1;
+  right: -300px; /* Awalnya di luar layar sebelah kanan */
+  width: 200px;
+  height: 50%;
+  background-color: #6b1515;
+  color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: right 0.3s ease-in-out; /* Animasi smooth saat masuk/keluar */
+}
+
+#nav-menu ul {
+  list-style-type: none;
+  padding: 20px;
+  margin: 0;
+}
+
+#nav-menu li {
+  margin: 20px 0;
+}
+
+#nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+}
+
+/* Untuk menampilkan nav-menu */
+#nav-menu.show {
+  right: 0; /* Posisi menu saat muncul di layar */
+}
+
+.header .fa-user-circle {
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border: 1px solid #6b1515;
+  border-radius: 20px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.buttons button.active {
+  background-color: #6b1515;
+  color: #fff;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#restaurant-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Menambahkan jarak 20px antara elemen */
+}
+
+.card {
+  flex: 0 0 calc(40% - 15px); /* Mengatur lebar kartu restoran menjadi 50% dengan margin */
+  margin-bottom: 10px; /* Jarak antara baris */
+  border: 1px solid #ddd; /* Contoh
+    border: 1px solid #ddd; /* Contoh border */
+  border-radius: 10px; /* Sudut membulat */
+  padding: 10px; /* Padding di dalam kartu */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bayangan untuk efek kedalaman */
+}
+
+.card .images {
+  display: flex;
+  gap: 10px;
+}
+
+.card .images img {
+  width: calc(30% - 10px); /* Mengatur lebar gambar menjadi 30% dari kartu */
+  border-radius: 10px;
+}
+
+.card .info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.card .info .rating {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.card .info .rating .fa-star {
+  color: #fffb04;
+  margin-right: 5px;
+}
+
+.card .info .rating span {
+  font-size: 14px;
+}
+
+.card .description {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.card .description p {
+  margin: 5px 0;
+}
+
+.card .actions {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.card .actions .fa-heart {
+  font-size: 20px;
+  color: #f50505;
+  margin-right: 5px;
+}
+
+.card .actions .fa-heart span {
+  text-align: right;
+}
+
+/* Media Queries untuk responsivitas */
+@media (max-width: 1024px) {
+  .card {
+    flex: 0 0 calc(50% - 20px); /* 2 kartu per baris untuk laptop */
+  }
+}
+
+@media (max-width: 768px) {
+  #nav-menu {
+    width: 30%; /* Lebar menu untuk perangkat mobile */
+    right: -80%; /* Awalnya di luar layar sebelah kanan */
+    height: 40%;
+  }
+
+  #restaurant-container {
+    flex-direction: column; /* Mengatur menjadi kolom untuk perangkat kecil */
+  }
+
+  .card {
+    flex: 0 0 100%; /* Mengatur lebar kartu menjadi 100% untuk perangkat kecil */
+  }
+}
